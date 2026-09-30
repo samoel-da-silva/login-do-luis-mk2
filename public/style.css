@@ -1,0 +1,160 @@
+:root {
+    color-scheme: light;
+    --navy: #102a56;
+    --blue: #1769aa;
+    --blue-light: #eaf3fb;
+    --red: #c83d4b;
+    --ink: #19283d;
+    --muted: #62738a;
+    --line: #d6e0eb;
+    --surface: #ffffff;
+    --page: #123d73;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 48px 20px;
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at 12% 12%, rgba(100, 178, 239, .35), transparent 34%),
+        radial-gradient(ellipse at 90% 88%, rgba(200, 61, 75, .22), transparent 30%),
+        linear-gradient(135deg, #0c2d58 0%, #1769aa 54%, #123d73 100%);
+}
+
+.container {
+    position: relative;
+    width: min(100%, 560px);
+    padding: 38px 42px 40px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid rgba(214, 224, 235, .9);
+    border-radius: 20px;
+    box-shadow: 0 22px 60px rgba(16, 42, 86, .12), 0 3px 10px rgba(16, 42, 86, .05);
+}
+
+.container::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 6px;
+    content: "";
+    background: linear-gradient(90deg, var(--blue) 0 72%, var(--red) 72% 100%);
+}
+
+h2 {
+    margin: 0 0 30px;
+    color: var(--navy);
+    font-size: clamp(1.55rem, 4vw, 1.9rem);
+    letter-spacing: -.035em;
+}
+
+h2::after {
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin-top: 12px;
+    content: "";
+    background: var(--red);
+    border-radius: 4px;
+}
+
+.form-group { margin-bottom: 21px; }
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #30445e;
+    font-size: .93rem;
+    font-weight: 650;
+}
+
+input[type="text"], textarea {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    color: var(--ink);
+    font: inherit;
+    background: #fbfdff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+input[type="text"]::placeholder, textarea::placeholder { color: #91a0b2; }
+input[type="text"]:focus, textarea:focus {
+    background: #fff;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(23, 105, 170, .12);
+}
+
+textarea { min-height: 96px; resize: vertical; }
+
+.checkbox-group {
+    padding: 17px 18px 10px;
+    background: var(--blue-light);
+    border: 1px solid #d5e6f5;
+    border-radius: 12px;
+}
+
+.checkbox-group > label:first-child { color: var(--navy); margin-bottom: 13px; }
+.checkbox-group label:not(:first-child) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px;
+    color: #40536b;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    accent-color: var(--blue);
+    cursor: pointer;
+}
+
+#autoridadeContainer {
+    display: none;
+    margin-top: -5px;
+    padding: 16px;
+    background: #fff6f6;
+    border: 1px solid #f1d2d5;
+    border-left: 4px solid var(--red);
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    margin-top: 3px;
+    padding: 14px 18px;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    background: linear-gradient(110deg, var(--blue), #205a9a 78%, var(--red));
+    border: 0;
+    border-radius: 11px;
+    box-shadow: 0 8px 18px rgba(23, 105, 170, .2);
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+button:hover { transform: translateY(-1px); box-shadow: 0 11px 22px rgba(23, 105, 170, .25); filter: saturate(1.08); }
+button:active { transform: translateY(0); }
+button:focus-visible { outline: 3px solid rgba(200, 61, 75, .4); outline-offset: 3px; }
+
+@media (max-width: 520px) {
+    body { padding: 24px 14px; }
+    .container { padding: 32px 22px 26px; border-radius: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}

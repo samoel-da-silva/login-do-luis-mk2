@@ -1,0 +1,33 @@
+RESUMO - SISTEMA DE CADASTRO NO RENDER + NEON
+
+O projeto usa Node.js, Express e PostgreSQL. O banco PostgreSQL fica no Neon; o site roda como Web Service no Render.
+
+FRONTEND
+- public/index.html e public/style.css foram preservados.
+- A tela mantém o fundo azul, detalhes vermelhos e seleção de apenas um vínculo por vez.
+
+BANCO
+- O servidor cria a tabela "usuarios" no Neon durante a inicialização.
+- O SQLite antigo não é usado neste deploy. A cópia consultada estava vazia; o Neon começa sem registros.
+- Não envie DATABASE_URL nem senhas ao GitHub.
+
+SEGURANÇA
+- /registros e /baixar-relatorio pedem autenticação HTTP Basic.
+- Configure ADMIN_USER e ADMIN_PASSWORD como variáveis secretas no Render.
+
+PUBLICAÇÃO
+1. Crie um repositório privado vazio no GitHub.
+2. No terminal:
+   cd /home/sam/sistema_cadastro_render_neon
+   git init
+   git add .
+   git commit -m "Deploy cadastro no Render e Neon"
+   git branch -M main
+   git remote add origin https://github.com/SEU_USUARIO/sistema-cadastro.git
+   git push -u origin main
+3. Crie um projeto no Neon. Em Connect, copie a URL pooled (host com -pooler e sslmode=require).
+4. No Render, escolha New > Blueprint e conecte o repositório.
+5. No Environment do serviço, preencha DATABASE_URL, ADMIN_USER e ADMIN_PASSWORD.
+6. Aguarde o deploy e abra a URL onrender.com. O formulário fica em /.
+
+O render.yaml já configura build (npm install --omit=dev), início (npm start) e health check (/health).

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro de Visitante</h2>
+        <form id="cadastroForm" action="/cadastrar" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="cpf">CPF ou RG:</label>
+                <input type="text" maxlength="11" id="cpf" name="cpf" placeholder="CPF ou RG" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Número de Telefone:</label>
+                <input type="text" maxlength="11" id="telefone" name="telefone" required>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label>Tipo de Vínculo (Marque os aplicáveis):</label>
+                <label><input type="checkbox" name="vinculo" value="Pai/Mãe"> Pai/Mãe</label>
+                <label><input type="checkbox" name="vinculo" value="Aluno"> Aluno</label>
+                <label><input type="checkbox" name="vinculo" value="Responsável"> Responsável</label>
+                <label><input type="checkbox" name="vinculo" value="Convidado"> Convidado</label>
+                <label><input type="checkbox" id="chkAutoridade" name="vinculo" value="Autoridade"> Autoridade</label>
+            </div>
+
+            <!-- Campo obrigatório se Autoridade -->
+            <div class="form-group" id="autoridadeContainer">
+                <label for="descAutoridade">Qual autoridade?</label>
+                <input type="text" id="descAutoridade" name="descAutoridade" placeholder="Ex: Diretor de Ensino, Secretário...">
+            </div>
+
+            <!-- Novo campo de Observação -->
+            <div class="form-group">
+                <label for="observacao">Observação:</label>
+                <textarea id="observacao" name="observacao" rows="3" placeholder="Ex: responsavel do aluno tal turma tal, ou em caso de ser aluno, aluno tal turma tal"></textarea>
+            </div>
+
+            <button type="submit">Enviar Cadastro</button>
+        </form>
+    </div>
+
+    <script>
+        const chkAutoridade = document.getElementById('chkAutoridade');
+        const checkboxesVinculo = document.querySelectorAll('input[name="vinculo"]');
+        const autoridadeContainer = document.getElementById('autoridadeContainer');
+        const descAutoridade = document.getElementById('descAutoridade');
+
+        checkboxesVinculo.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    checkboxesVinculo.forEach(function(outroCheckbox) {
+                        if (outroCheckbox !== checkbox) outroCheckbox.checked = false;
+                    });
+                }
+
+                if (chkAutoridade.checked) {
+                autoridadeContainer.style.display = 'block';
+                descAutoridade.required = true; 
+                } else {
+                    autoridadeContainer.style.display = 'none';
+                    descAutoridade.required = false;
+                    descAutoridade.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
